@@ -4,6 +4,10 @@ from django.template import loader
 from blogging.models import Post
 from django.shortcuts import render
 
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+
+
 def stub_view(request, *args, **kwargs):
     body = "Stub View\n\n"
     if args:
@@ -14,11 +18,15 @@ def stub_view(request, *args, **kwargs):
         body += "\n".join(["\t%s: %s" % i for i in kwargs.items()])
     return HttpResponse(body, content_type="text/plain")
 
-def list_view(request):
-    published = Post.objects.exclude(published_date__exact=None)
-    posts = published.order_by('-published_date')
-    context = {'posts': posts}
-    return render(request,'blogging/list.html', context)
+# def list_view(request):
+#     published = Post.objects.exclude(published_date__exact=None)
+#     posts = published.order_by('-published_date')
+#     context = {'posts': posts}
+#     return render(request,'blogging/list.html', context)
+
+class BloggingListView(ListView):
+    model = Post#.objects#.order_by('-published_date')#.filter(published__date__exact=None)
+    template_name = 'blogging/list.html'
 
 def detail_view(request, post_id):
     published = Post.objects.exclude(published_date__exact=None)
@@ -28,3 +36,5 @@ def detail_view(request, post_id):
         raise Http404
     context = {'post': post}
     return render(request, 'blogging/detail.html', context)
+
+# class BloggingDetailView()
