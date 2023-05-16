@@ -13,10 +13,9 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [CategoryInLine]
 
 class CategoryAdmin(admin.ModelAdmin):
-    inlines = [CategoryInLine]
-    exclude = ('Posts',)
+    exclude = ('posts',)
 
 
 # Register your models here.
 admin.site.register(Post,PostAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
