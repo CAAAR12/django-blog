@@ -15,8 +15,7 @@ from django.views.generic.detail import DetailView
 #     return render(request,'blogging/list.html', context)
 
 class BloggingListView(ListView):
-    queryset = Post.objects.all()
-    #.objects#.order_by('-published_date')#.filter(published__date__exact=None)
+    queryset = Post.objects.order_by('-published_date')#.filter(published__date__exact=None)
     template_name = 'blogging/list.html'
     context_object_name = 'queryset'
 
