@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include  # <-- Make sure you have both of these imports.
 from django.contrib.auth.views import LoginView, LogoutView
-from blogging.views import BloggingListView, detail_view
+from blogging.views import BloggingListView, BloggingDetailView
 # from blogging.views import list_view, detail_view
 # from blogging.views import list_view, DeatilListView
 urlpatterns = [
-    path('posts/<int:post_id>/',detail_view,name="blog_detail"),
+    path('posts/<int:pk>/',BloggingDetailView.as_view(),name="blog_detail"),
     path('', BloggingListView.as_view(), name="blog_index"),
 ]
 # urlpatterns = [
